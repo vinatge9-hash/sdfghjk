@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VerifyNow — Seamless & Secure Email Verification</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Font placeholder (server will replace) -->
+  <link href="https://fonts.googleapis.com/css2?family={{font:Inter}}:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    /* Simple fade-in on scroll using Tailwind classes toggled via JS */
+    [data-animate] { opacity: 0; transform: translateY(20px); transition: all 700ms ease-out; }
+    [data-animate].visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen antialiased">
+  <!-- Header -->
+  <header class="bg-gray-900/90 backdrop-blur sticky top-0 z-40 border-b border-gray-800">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <!-- Left: Logo & Brand -->
+      <div class="flex items-center space-x-2">
+        <!-- Inline SVG Logo -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-label="VerifyNow logo" class="text-cyan-400">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#38bdf8" />
+              <stop offset="1" stop-color="#22d3ee" />
+            </linearGradient>
+          </defs>
+          <path d="M12 3l7 4v6l-7 4-7-4V7l7-4z" fill="url(#g1)" opacity=".9"/>
+          <path d="M5 11l7 4 7-4" stroke="url(#g1)" stroke-width="2" fill="none"/>
+        </svg>
+        <span class="text-2xl font-extrabold tracking-tight">VerifyNow</span>
+      </div>
+      <!-- Center: Navigation (hidden on mobile) -->
+      <nav class="hidden md:flex space-x-6">
+        <a href="#home" class="hover:text-cyan-400" aria-label="Home">Home</a>
+        <a href="#api" class="hover:text-cyan-400" aria-label="API Docs">API</a>
+        <a href="#pricing" class="hover:text-cyan-400" aria-label="Pricing">Pricing</a>
+        <a href="#contact" class="hover:text-cyan-400" aria-label="Contact">Contact</a>
+        <a href="login.html" class="hover:text-cyan-400" aria-label="Login">Login</a>
+      </nav>
+      <!-- Right: CTA -->
+      <div class="flex items-center space-x-3">
+        <button id="cta-home" onclick="openSignupModal()" class="hidden md:inline-flex items-center px-4 py-2 rounded-lg bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] hover:from-[#2563eb] hover:to-[#22d3ee] text-white font-semibold">
+          Get Started for Free
+        </button>
+        <!-- Mobile menu button -->
+        <button id="hamburger" class="md:hidden" aria-label="Open menu" onclick="toggleMobileMenu()">
+          <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-gray-900/95 border-t border-gray-800">
+      <a href="#home" class="block px-4 py-2">Home</a>
+      <a href="#api" class="block px-4 py-2">API</a>
+      <a href="#pricing" class="block px-4 py-2">Pricing</a>
+      <a href="#contact" class="block px-4 py-2">Contact</a>
+      <a href="login.html" class="block px-4 py-2">Login</a>
+      <div class="px-4 py-3">
+        <button class="w-full bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] text-white px-4 py-2 rounded-lg" onclick="openSignupModal()">Get Started for Free</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Signup Modal (CTA) -->
+  <div id="signup-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+    <div class="bg-gray-900/90 rounded-2xl p-6 w-full max-w-md mx-4" role="dialog" aria-label="Sign up">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-bold">Start your free trial</h3>
+        <button onclick="closeSignupModal()" aria-label="Close">✕</button>
+      </div>
+      <form id="signup-form" onsubmit="return false;">
+        <label class="block text-sm mb-2">Work Email</label>
+        <input type="email" required class="w-full px-3 py-2 rounded bg-gray-800 border border-gray-700 focus:border-blue-500 focus:outline-none" placeholder="you@company.com" />
+        <button type="submit" class="w-full mt-4 py-2 rounded bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] text-white font-semibold">Create Free Account</button>
+        <p class="text-xs text-gray-400 mt-2">By continuing you agree to our terms and privacy policy.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex items-center" style="background-image:url('https://images.unsplash.com/photo-1589539574113-aa8d54506e9d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHw2fHxuZW9uJTIwdGVjaCUyMGJhY2tncm91bmQlMjBmb3IlMjBoZXJvJTIwLSUyMHZlcmlmeW5vd3xlbnwwfDB8fHwxNzU2ODcyMDI1fDA&ixlib=rb-4.1.0&q=80&w=1080'); background-size:cover; background-position:center; position:relative;">
+    <div class="absolute inset-0 bg-gradient-to-br from-black via-transparent to-black opacity-60"></div>
+    <div class="relative z-10 container mx-auto px-4 py-28 md:py-40 flex-1">
+      <div class="max-w-3xl" data-animate>
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-4" style="text-shadow:0 2px 20px rgba(0,180,255,.4);">
+          Seamless & Secure Email Verification.
+        </h1>
+        <p class="text-lg md:text-xl text-gray-200 leading-relaxed" data-animate>
+          VerifyNow delivers fast, reliable OTP-based email verification via a simple API. Validate addresses in real time,
+          curb deliverability issues, and safeguard your workflows with enterprise-grade security. Our API is designed for
+          developers—easy to integrate, scalable, and designed to adapt to your unique verification requirements.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4" data-animate>
+          <a href="#pricing" class="inline-flex items-center px-6 py-3 rounded-lg bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] hover:from-[#2563eb] hover:to-[#22d3ee] font-semibold">Get Started for Free</a>
+          <a href="#api" class="inline-flex items-center px-6 py-3 rounded-lg border border-white/60 text-white hover:bg-white/10">View API Docs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="py-20" aria-label="Key Features">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12" data-animate>
+        <span class="text-sm uppercase tracking-widest text-cyan-400">Why VerifyNow</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold mt-2">Built for developers, trusted by teams</h2>
+        <p class="max-w-2xl mx-auto text-gray-300 mt-4">Our API focuses on reliability, speed, and security. Spin up in minutes, integrate with a few lines of code, and scale as your verification needs grow. We provide clear documentation, robust error handling, and a developer-friendly experience with reliable uptime and clear metrics.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="bg-gray-900/60 rounded-xl p-6 shadow hover:shadow-xl transition-shadow" data-animate>
+          <div class="flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] mb-4">
+            <!-- Icon: Bolt -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Fast Integration">
+              <path d="M13 3L4 14h7l-1 7 9-11h-7l1-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Fast Integration</h3>
+          <p class="text-gray-400">Drop-in SDKs and a lightweight REST API designed for speed. Get your first verified email in minutes, with minimal boilerplate and robust error handling. Our onboarding guides walk you through common use cases, from single verification to bulk validation with OTP orchestration.</p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="bg-gray-900/60 rounded-xl p-6 shadow hover:shadow-xl transition-shadow" data-animate>
+          <div class="flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] mb-4">
+            <!-- Icon: Shield -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" aria-label="High Deliverability">
+              <path d="M12 3l9 4v5c0 5-3.5 9-9 9s-9-4-9-9V7l9-4z"/>
+              <path d="M9 11l3 3 3-3"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">High Deliverability</h3>
+          <p class="text-gray-400">Validation results you can trust. Our policies reduce false positives and enhance deliverability by validating syntax, domain, and mailbox status in real time. OTP delivery is reliable, and retries are intelligently managed to maximize success rates.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="bg-gray-900/60 rounded-xl p-6 shadow hover:shadow-xl transition-shadow" data-animate>
+          <div class="flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] mb-4">
+            <!-- Icon: Lock -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" aria-label="Secure">
+              <rect x="3" y="11" width="18" height="10" rx="2"/>
+              <path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Secure</h3>
+          <p class="text-gray-400">End-to-end security with OTP-based verification, encryption in transit, and compliance-ready workflows. Your data remains in your control, with granular access controls and audit logs to keep you compliant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Depth: How VerifyNow Works (short descriptive paragraphs) -->
+  <section class="py-16 bg-gray-950" aria-label="How it works" data-animate>
+    <div class="container mx-auto px-4 max-w-5xl">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">How VerifyNow Works</h2>
+      <p class="text-gray-300 leading-relaxed mb-4">VerifyNow is designed to integrate into your existing user lifecycle with minimal friction. When you submit an email address via our API, VerifyNow performs a sequence of checks in real time: syntax validation, domain-availability check, MX and SMTP dialing to validate mailbox existence, and OTP-based verification when you request confirmation. Our OTP flow ensures that end users can verify ownership securely without exposing sensitive data. This process helps you reduce bounce rates, protect your reputation, and improve engagement metrics across campaigns and onboarding flows.</p>
+      <p class="text-gray-300 leading-relaxed mb-4">Our API is designed for developers: concise error handling, clear status codes, and predictable latency. You can start with a single verification endpoint and scale to bulk verification with asynchronous results. We provide detailed error messages, comprehensive rate limiting documentation, and telemetry hooks so you can monitor performance and reliability in real time. Teams can set up automated OTP rotations, implement fallback verification methods, and configure trusted IPs and domains to secure the integration. Hyderabad-based data center considerations are baked into our default regionalization settings for customers in India, ensuring compliance and lower latency where you operate.</p>
+      <p class="text-gray-300 leading-relaxed">With VerifyNow, you’re not just verifying emails—you’re building a trusted identity verification layer for your platforms. Whether you’re validating signups, onboarding flows, or transactional emails, our API provides the reliability and security you need to scale with confidence. Our customer success team provides dedicated support during onboarding, and our knowledge base is updated with best practices for OTP usage, security hardening, and integration patterns across languages and frameworks.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-200 pt-12 pb-6 mt-12 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <div class="flex items-center space-x-2 mb-3">
+          <span class="w-6 h-6 inline-block bg-cyan-500 rounded-full"></span>
+          <strong>VerifyNow</strong>
+        </div>
+        <p class="text-gray-400 text-sm">Hyderabad, Telangana, India. Placeholder address for demo purposes.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Resources</h4>
+        <ul class="text-sm text-gray-400 space-y-1">
+          <li><a href="#api" class="hover:text-cyan-400">API Docs</a></li>
+          <li><a href="#pricing" class="hover:text-cyan-400">Pricing</a></li>
+          <li><a href="#contact" class="hover:text-cyan-400">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Contact</h4>
+        <p class="text-sm text-gray-400 mb-1">Email: support@verifynow.example</p>
+        <p class="text-sm text-gray-400">Phone: +91 98765-43210</p>
+      </div>
+    </div>
+    <div class="mt-6 text-center text-sm text-gray-500">&copy; 2025 VerifyNow. All rights reserved.</div>
+  </footer>
+
+  <!-- Scripts: Mobile Menu, Modal, Animations -->
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const isHidden = menu.classList.contains('hidden');
+      menu.classList.toggle('hidden', !isHidden);
+      // Icon swap could be added here if desired
+    }
+
+    function openSignupModal() {
+      const m = document.getElementById('signup-modal');
+      m.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSignupModal() {
+      const m = document.getElementById('signup-modal');
+      m.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // Scroll animation: reveal on view
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('[data-animate]');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      sections.forEach(sec => {
+        sec.classList.add('opacity-0');
+        obs.observe(sec);
+      });
+    });
+
+  </script>
+</body>
+</html>
