@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VerifyNow Pricing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family={{font:Inter}}:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    [data-animate] { opacity: 0; transform: translateY(20px); transition: all 700ms ease-out; }
+    [data-animate].visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen">
+  <!-- Reusable Header -->
+  <header class="bg-gray-900/90 sticky top-0 z-40 border-b border-gray-800">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-label="VerifyNow logo" class="text-cyan-400"><path d="M12 3l7 4v6l-7 4-7-4V7l7-4z" fill="url(#g1)"/><path d="M5 11l7 4 7-4" stroke="#38bdf8"/></svg>
+        <span class="text-2xl font-extrabold">VerifyNow</span>
+      </div>
+      <nav class="hidden md:flex space-x-6">
+        <a href="index.html#home" class="hover:text-cyan-400">Home</a>
+        <a href="#api" class="hover:text-cyan-400">API</a>
+        <a href="#pricing" class="hover:text-cyan-400">Pricing</a>
+        <a href="#contact" class="hover:text-cyan-400">Contact</a>
+        <a href="login.html" class="hover:text-cyan-400">Login</a>
+      </nav>
+      <a href="login.html" class="hidden md:inline-flex items-center px-4 py-2 rounded-lg bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] text-white">Get Started</a>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-16">
+    <section class="mb-12" data-animate>
+      <h1 class="text-3xl md:text-4xl font-black">Pricing</h1>
+      <p class="text-gray-400 mt-4">Choose a plan that fits your verification needs. All plans include real-time OTP-based email verification, secure endpoints, and scalable performance. You can upgrade, cancel, or trial anytime. Prices shown are per month billed annually for simplicity in this mock; in real deployments you would offer monthly billing as well.
+      </p>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6" aria-label="Pricing Tiers">
+      <!-- Free -->
+      <article class="bg-gray-900/60 rounded-xl p-6 shadow hover:shadow-xl" data-animate>
+        <h3 class="text-xl font-bold mb-2">Free</h3>
+        <div class="flex items-baseline gap-2">
+          <span class="text-4xl font-black">0</span><span class="text-sm text-gray-400">/mo</span>
+        </div>
+        <p class="text-sm text-gray-400 mb-4">Ideal for small apps and evaluation. Includes essential validation with limited API calls and basic OTP flows.</p>
+        <ul class="text-sm text-gray-300 space-y-2 mb-4">
+          <li>Up to 1,000 API calls/month</li>
+          <li>Email syntax checks</li>
+          <li>Domain existence checks</li>
+          <li>OTP verification (limited)</li>
+        </ul>
+        <button class="w-full bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] text-white py-2 rounded">Choose Free</button>
+      </article>
+      <!-- Pro -->
+      <article class="bg-gray-900/60 rounded-xl p-6 shadow hover:shadow-xl" data-animate>
+        <h3 class="text-xl font-bold mb-2">Pro</h3>
+        <div class="flex items-baseline gap-2">
+          <span class="text-4xl font-black">19</span><span class="text-sm text-gray-400">/mo</span>
+        </div>
+        <p class="text-sm text-gray-400 mb-4">Best for growing teams needing higher API limits and advanced OTP flows with improved reliability.</p>
+        <ul class="text-sm text-gray-300 space-y-2 mb-4">
+          <li>Up to 50,000 API calls/month</li>
+          <li>Real-time OTP verification</li>
+          <li>Priority support</li>
+          <li>Dedicated rate limits</li>
+        </ul>
+        <button class="w-full bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] text-white py-2 rounded">Choose Pro</button>
+      </article>
+      <!-- Enterprise -->
+      <article class="bg-gray-900/60 rounded-xl p-6 shadow hover:shadow-xl" data-animate>
+        <h3 class="text-xl font-bold mb-2">Enterprise</h3>
+        <div class="flex items-baseline gap-2">
+          <span class="text-4xl font-black">99</span><span class="text-sm text-gray-400">/mo</span>
+        </div>
+        <p class="text-sm text-gray-400 mb-4">For large enterprises requiring high volume, custom SLAs, and advanced security features.</p>
+        <ul class="text-sm text-gray-300 space-y-2 mb-4">
+          <li>Unlimited API calls (subject to SLA)</li>
+          <li>Custom OTP routing & branding</li>
+          <li>Dedicated architect & 24/7 support</li>
+          <li>On-prem or private cloud options</li>
+        </ul>
+        <button class="w-full bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] text-white py-2 rounded">Contact Sales</button>
+      </article>
+    </section>
+
+    <section class="mt-16 text-gray-300" data-animate>
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">What’s Included Across Plans</h2>
+      <p class="leading-relaxed">Each VerifyNow plan includes secure API endpoints, real-time OTP-based verification, and comprehensive analytics. You’ll access reliable uptime, detailed logs, and global routing with automatic failover. Our sandbox environment lets you test without touching production data, and you can generate API keys from your dashboard at any time. We support multiple authentication methods, including API keys and OAuth-style token flows, to fit your security posture. For teams in Hyderabad and across India, our data routing defaults prioritize low latency and compliance with local regulations. Our refund policy is straightforward, with a trial window for evaluating throughput and accuracy before committing long-term.</p>
+    </section>
+  </main>
+
+  <!-- Footer (consistent) -->
+  <footer class="bg-gray-900 text-gray-200 pt-12 pb-6 mt-12 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <strong>VerifyNow</strong>
+        <p class="text-sm text-gray-400 mt-2">Hyderabad, Telangana, India</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Links</h4>
+        <ul class="text-sm text-gray-400 space-y-1">
+          <li><a href="index.html#home" class="hover:text-cyan-400">Home</a></li>
+          <li><a href="#api" class="hover:text-cyan-400">API</a></li>
+          <li><a href="#pricing" class="hover:text-cyan-400">Pricing</a></li>
+          <li><a href="#contact" class="hover:text-cyan-400">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Contact</h4>
+        <p class="text-sm text-gray-400">Email: support@verifynow.example</p>
+      </div>
+    </div>
+    <div class="mt-6 text-center text-sm text-gray-500">&copy; 2025 VerifyNow. All rights reserved.</div>
+  </footer>
+
+  <script>
+    function openSignupModal(){ const m=document.getElementById('signup-modal'); m.classList.remove('hidden'); document.body.style.overflow='hidden'; }
+    function closeSignupModal(){ const m=document.getElementById('signup-modal'); m.classList.add('hidden'); document.body.style.overflow=''; }
+    document.addEventListener('DOMContentLoaded', ()=>{ const sections=document.querySelectorAll('[data-animate]'); const obs=new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target);} }); },{threshold:0.2}); sections.forEach(sec=>{ sec.classList.add('opacity-0'); obs.observe(sec); }); });
+  </script>
+</body>
+</html>
