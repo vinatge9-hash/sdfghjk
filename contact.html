@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VerifyNow - Contact</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family={{font:Inter}}:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <style>[data-animate]{opacity:0; transform:translateY(20px); transition:all 700ms ease-out;} [data-animate].visible{opacity:1; transform:none;}</style>
+</head>
+<body class="bg-gray-950 text-gray-100">
+  <!-- Header -->
+  <header class="bg-gray-900/90 sticky top-0 z-40 border-b border-gray-800">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-label="VerifyNow logo" class="text-cyan-400"><path d="M12 3l7 4v6l-7 4-7-4V7l7-4z" fill="#22d3ee"/></svg>
+        <span class="text-2xl font-extrabold">VerifyNow</span>
+      </div>
+      <nav class="hidden md:flex space-x-6"><a href="index.html#home" class="hover:text-cyan-400">Home</a><a href="#api" class="hover:text-cyan-400">API</a><a href="pricing.html" class="hover:text-cyan-400">Pricing</a><a href="contact.html" class="hover:text-cyan-400">Contact</a><a href="login.html" class="hover:text-cyan-400">Login</a></nav>
+      <a href="login.html" class="hidden md:inline-flex items-center px-4 py-2 rounded-lg bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] text-white">Sign In</a>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-12">
+    <section data-animate>
+      <h1 class="text-3xl md:text-4xl font-black mb-3">Contact VerifyNow</h1>
+      <p class="text-gray-400 leading-relaxed">We’d love to hear from you. Whether you’re evaluating the API, planning a large-scale deployment, or seeking enterprise-grade support, our team is ready to assist. Use the form to send us a message, and we’ll respond promptly. For immediate assistance, you can also reach us at our Hyderabad, India office or via email. Hyderabad serves as our regional hub, and we frequently host developer sessions and meetups in the area.</p>
+
+      <div class="mt-6 space-y-4">
+        <div class="flex items-start space-x-3 bg-gray-800/40 p-4 rounded-lg">
+          <div class="flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="cyan" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+          <div>
+            <div class="font-semibold">Address</div>
+            <div class="text-sm text-gray-400">VerifyNow HQ, 1-2, Road Number, Hyderabad, Telangana, India</div>
+          </div>
+        </div>
+        <div class="flex items-start space-x-3 bg-gray-800/40 p-4 rounded-lg">
+          <div class="flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="cyan" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h18"/></svg></div>
+          <div>
+            <div class="font-semibold">Phone</div>
+            <div class="text-sm text-gray-400">+91 98765-43210</div>
+          </div>
+        </div>
+        <div class="flex items-start space-x-3 bg-gray-800/40 p-4 rounded-lg">
+          <div class="flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="cyan" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 8h8v8H8z"/></svg></div>
+          <div>
+            <div class="font-semibold">Email</div>
+            <div class="text-sm text-gray-400">support@verifynow.example</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-animate class="bg-gray-900/60 rounded-xl p-6 shadow">
+      <h2 class="text-2xl font-bold mb-2">Send us a message</h2>
+      <form id="contact-form" novalidate>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="block text-sm mb-1">Your Name</label>
+            <input type="text" class="w-full px-3 py-2 rounded bg-gray-800 border border-gray-700 focus:border-blue-500" required />
+          </div>
+          <div>
+            <label class="block text-sm mb-1">Email</label>
+            <input type="email" class="w-full px-3 py-2 rounded bg-gray-800 border border-gray-700 focus:border-blue-500" required />
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm mb-1">Message</label>
+          <textarea class="w-full h-40 resize-none px-3 py-2 rounded bg-gray-800 border border-gray-700 focus:border-blue-500" required></textarea>
+        </div>
+        <button type="submit" class="px-4 py-2 rounded bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] text-white" onclick="validateAndSubmit(event)">Send Message</button>
+        <p id="form-status" class="text-sm text-green-400 mt-2" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-200 pt-8 pb-6 mt-12 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <strong>VerifyNow</strong>
+        <p class="text-sm text-gray-400 mt-2">Hyderabad, Telangana, India</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Links</h4>
+        <ul class="text-sm text-gray-400 space-y-1">
+          <li><a href="index.html#home" class="hover:text-cyan-400">Home</a></li>
+          <li><a href="pricing.html" class="hover:text-cyan-400">Pricing</a></li>
+          <li><a href="#api" class="hover:text-cyan-400">API</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-2">Support</h4>
+        <p class="text-sm text-gray-400">Email: support@verifynow.example</p>
+      </div>
+    </div>
+    <div class="mt-6 text-center text-sm text-gray-500">&copy; 2025 VerifyNow. All rights reserved.</div>
+  </footer>
+
+  <script>
+    function validateAndSubmit(e){ e.preventDefault(); const status=document.getElementById('form-status'); status.textContent='Thank you! Your message has been received. We will respond shortly.'; }
+    // Simple scroll animations
+    document.addEventListener('DOMContentLoaded', ()=>{ const items=document.querySelectorAll('[data-animate]'); const obs=new IntersectionObserver((entries)=>{ entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('visible'); } }); },{threshold:0.2}); items.forEach(el=>{ el.style.opacity='0'; obs.observe(el); }); });
+  </script>
+</body>
+</html>
